@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+
+<div id='el1' v-bind:class="{active:isActive, 'text-danger':hasError}">v-bind:class"{active: isActive}"</div>
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+
+<script>
+    var vm1 = new Vue({
+        el: '#el1',
+        data: {
+            isActive: false,
+            error: null
+        },
+        computed: {
+            classObject: function () {
+                return {
+                    active: this.isActive && !this.error,
+                    'text-danger': this.error && this.error.type === 'fatal'
+                }
+            }
+        }
+    })
+</script>
+
+<div id='el2' v-bind:style="{color: activeColor, fontSize: fontSize+'px'}"> v-bind:style</div>
+<script>
+    var vm2 = new Vue({
+        el: '#el2',
+        data: {
+            activeColor: 'red',
+            fontSize: 30
+        }
+    })
+</script>
+
+<div id="el3" v-bind:style="[baseStyle, overridingStyles]">el3</div>
+<script>
+    var vm3 = new Vue({
+        el: '#el3',
+    })
+</script>
+
+</body>
+</html>
