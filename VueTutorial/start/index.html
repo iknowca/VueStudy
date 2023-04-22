@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<div id="app">
+    {{message}}
+</div>
+<!-- v-bind 속성은 디렉티브라고 한다. 디렉티브는 Vue에서 제공하는 특수 속성임을 나타내는 v-접두어가 붙어있으며
+사용자가 짐작할 수 있듯 렌더링 된 DOM에 특수한 반응형 동작을 합니다.
+기본적으로 이 요소의 title속성을 Vue인스턴스의 message속성으로 최신상태를 유지합니다 -->
+
+<div id="app-2">
+    <span v-bind:title="message">
+        내 위에 잠시 마우스를 올리면 동적으로 바인딩 된 title을 볼 수 있습니다!
+    </span>
+</div>
+
+<div id="app-3">
+    <p v-if="seen">이제 나를 볼 수 있어요</p>
+</div>
+<div>
+<button type="submit" @cklick="onSubmit"></button>
+</div>
+
+</body>
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+<script>
+    var app = new Vue({
+        el: '#app',
+        data: {
+            message: '안녕하세요 Vue!'
+        }
+    })
+
+    var app2 = new Vue({
+        el: '#app-2',
+        data: {
+            message: '이 페이지는 ' + new Date() + '에 로드 되었습니다.'
+        }
+    })
+    // 자바스크립트 콘솔에 app3.seen=false를 입력하면 메시지가 사라진다.
+    //     이 예제는 텍스트의 속성 뿐 아니라 DOM 구조에도 데이터를 바인딩 할 수 있음을 보여준다
+    //
+    var app3 = new Vue({
+        el: '#app-3',
+        data: {
+            seen: false
+        }
+    })
+
+    export default {
+        data() {
+            return {
+            age: 3,
+            name: 'kim',
+                major: 'physics'
+            }
+        },
+        methods: {
+            onSubmit() {
+                axios.post('http://localhost:7777/axios-test',
+                    {
+                        name, major, age
+                    })
+                    .then((res) => {
+                        alert('succes')
+                    })
+                    .catch((res)=> {
+                        alert("fail")
+                    })
+            }
+        }
+    }
+</script>
+
+</html>
