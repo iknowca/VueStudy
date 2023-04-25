@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<div id="app">
+    <h1 id="el1" v-if="awesome">Vue is awesome!</h1>
+    <h1 v-else>Oh no</h1>
+    <template v-if="ok">
+        <h1>Title</h1>
+        <p>Paragraph1</p>
+        <p>Paragraph 2</p>
+    </template>
+</div>
+
+<script>
+    let vm1 = new Vue({
+        el: '#el1',
+        data: {
+            awesome: true,
+        }
+    });
+
+    let vm2 = new Vue({
+        el: '#app',
+        data: {
+            ok: true
+        }
+    });
+</script>
+<div id="app3">
+    <div v-if="Math.random() > 0.5">
+        이제 나를 볼 수 있어요
+    </div>
+    <div v-else>
+        이제는 안보입니다
+    </div>
+</div>
+<script>
+    let vm3 = new Vue({
+        el: '#app3',
+
+    })
+</script>
+
+<div>
+    <p>key를 이용한 재사용 가능한 앨리먼트</p>
+</div>
+<div id="app4">
+    <template v-if="loginType==='username'">
+        <label> 사용자 이름</label>
+        <input placeholder="tk사용자 이름을 입력하세요" key="username-input">
+    </template>
+    <template v-else>
+        <label> 이메일</label>
+        <input placeholder="이메일을 입력하세요" key="email-input">
+    </template>
+    <br>
+    <button v-on:click="changeLoginType">login Type</button>
+</div>
+<script>
+    let vm4 = new Vue({
+        el: '#app4',
+        data: {
+            loginType: 'username'
+        },
+        methods: {
+            changeLoginType() {
+                if (this.loginType==='username') {
+                    this.loginType='email'
+                } else {
+                    this.loginType='username'
+                }
+            }
+        }
+
+    })
+</script>
+
+</body>
+</html>
